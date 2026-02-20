@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ivory Tower</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <h1 style="font-style: oblique;"><a href="index.html">my ivory tower</a></h1>
+</header>
+
+<main class="posts">
+  <div class="blog-menu">
+    <h2>
+      about; <a href="index.html">blog</a>; genres;
+    </h2>
+  </div>
+
+  <div id="post-list">
+    <!-- Posts will be injected here -->
+  </div>
+</main>
+
+<script>
+  // List of all posts in posts/ folder
+  const postFiles = [
+    "testing.html",
+    "testing1.html",
+    "testing2.html"
+  ];
+
+  async function loadPosts() {
+    const container = document.getElementById("post-list");
+
+    for (const file of postFiles) {
+      const postId = file.replace(".html", "");
+
+      try {
+        const res = await fetch(`posts/${file}`);
+        if (!res.ok) throw new Error("Post not found: " + file);
+
+        const htmlText = await res.text();
+        const doc = new DOMParser().parseFromString(htmlText, "text/html");
+
+        // Metadata
+        const metaJSON = doc.querySelector(".post-meta").textContent;
+        const meta = JSON.parse(metaJSON);
+
+        // Post content
+        const postContent = doc.querySelector(".post-content").cloneNode(true);
+
+        // Preview logic: trim after data-cut
+        const cut = postContent.querySelector("[data-cut]");
+        if (cut) {
+          let node = cut.nextSibling;
+          while (node) {
+            const next = node.nextSibling;
+            node.remove();
+            node = next;
+          }
+          cut.remove();
+
+          // Add "Continue reading →" link
+          const link = document.createElement("a");
+          link.href = `post_viewer.html?postid=${postId}`;
+          link.textContent = "... read more";
+          link.className = "continue";
+          postContent.appendChild(link);
+        }
+
+        // Format date like homepage: "Jan 2, 2026<br>Sat 4:10pm"
+        const dateObj = new Date(meta.date + "T" + (meta.time || "00:00"));
+        const optionsDate = { month: 'short', day: 'numeric', year: 'numeric' };
+        const optionsDay = { weekday: 'short' };
+        const formattedDate = `${dateObj.toLocaleDateString('en-US', optionsDate)}<br>${dateObj.toLocaleDateString('en-US', optionsDay)} ${dateObj.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'})}`;
+
+        // Build post div
+        const postDiv = document.createElement("div");
+        postDiv.className = "post";
+        postDiv.innerHTML = `
+          <div class="post-header">
+            <h3><a href="post_viewer.html?postid=${postId}">${meta.title}</a></h3>
+            <span class="post-date">${formattedDate}</span>
+          </div>
+          <div class="post-body preview"></div>
+          <div class="post-footer">
+            tags: <span class="post-footer-tags">${meta.tags.join("; ")}</span>
+          </div>
+        `;
+
+        postDiv.querySelector(".post-body").appendChild(postContent);
+        container.appendChild(postDiv);
+
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  }
+
+  loadPosts();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Post Viewer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <h1><a href="index.html">Ivory Tower</a></h1>
+</header>
+
+        <main class="posts">
+            <div class="blog-menu">
+                <h2>
+                    about; <a href="index.html">blog</a>; genres;
+                </h2>
+            </div>
+                <main id="post-container">
+                <!-- Post will be injected here -->
+                </main>
+        </main>
+
+<script>
+// ---------- Helper: get query param ----------
+function getQueryParam(name) {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name);
+}// ---------- Load post ----------
+async function loadPost(postId) {
+  if (!postId) {
+    document.getElementById("post-container").innerHTML =
+      "<p>No post selected.</p>";
+    return;
+  }
+
+  try {
+    const res = await fetch(`posts/${postId}.html`);
+    if (!res.ok) throw new Error("Post not found");
+
+    const html = await res.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+
+    // Metadata
+    const metaJSON = doc.querySelector(".post-meta").textContent;
+    const meta = JSON.parse(metaJSON);
+
+    // Post content
+    const postContent = doc.querySelector(".post-content").cloneNode(true);
+
+    // Format date in same style as homepage
+    const dateObj = new Date(meta.date + "T" + (meta.time || "00:00"));
+    const optionsDate = { month: 'short', day: 'numeric', year: 'numeric' };
+    const optionsDay = { weekday: 'short' };
+
+    const formattedDate = `${dateObj.toLocaleDateString('en-US', optionsDate)}<br>${dateObj.toLocaleDateString('en-US', optionsDay)} ${dateObj.toLocaleTimeString('en-US', {hour: 'numeric', minute:'2-digit'})}`;
+
+    // Build final HTML
+    const container = document.getElementById("post-container");
+    container.innerHTML = `
+      <article class="post">
+        <div class="post-header">
+          <h2>${meta.title}</h2>
+          <span class="post-date">${formattedDate}</span>
+        </div>
+        <div class="post-body"></div>
+        <div class="post-footer">
+          tags: ${meta.tags.join("; ")}
+        </div>
+      </article>
+    `;
+
+    container.querySelector(".post-body").appendChild(postContent);
+
+  } catch (err) {
+    document.getElementById("post-container").innerHTML =
+      `<p>Error loading post: ${err.message}</p>`;
+    console.error(err);
+  }
+}
+
+// ---------- Run ----------
+const postId = getQueryParam("postid");
+loadPost(postId);
+</script>
+
+</body>
+</html>
