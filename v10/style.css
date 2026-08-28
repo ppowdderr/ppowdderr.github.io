@@ -1,0 +1,237 @@
+/* v10 — Card Catalogue: ruled index cards on a brass rod. */
+:root {
+    --walnut: #0d0b09;
+    --card: #14110d;
+    --cream: #ddd6c4;
+    --faint: #90897a;
+    --redrule: #6e3a33;
+    --bluerule: #23282e;
+    --brass: #9c8455;
+    --measure: 40rem;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--walnut);
+    color: var(--cream);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+        "Book Antiqua", Georgia, serif;
+    font-size: 16.5px;
+    line-height: 1.8;
+    position: relative;
+}
+
+/* the brass rod, running the length of the drawer */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    margin-left: -1.5px;
+    background: linear-gradient(to right, #3d3421 0%, var(--brass) 50%, #3d3421 100%);
+    opacity: 0.35;
+    z-index: 0;
+    pointer-events: none;
+}
+
+a {
+    color: inherit;
+}
+
+a:hover {
+    color: var(--brass);
+}
+
+a:focus-visible {
+    outline: 1px solid var(--brass);
+    outline-offset: 3px;
+}
+
+/* ---------- drawer front ---------- */
+.drawer-front {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 3.5rem 1.25rem 0.5rem;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.drawer-front h1 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+}
+
+.drawer-front h1 a {
+    text-decoration: none;
+}
+
+.drawer-front p {
+    margin: 0.5rem 0 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faint);
+}
+
+/* the drawer label plate */
+.drawer-front .plate {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.3rem 1.1rem;
+    border: 1px solid var(--brass);
+    border-radius: 2px;
+    color: var(--brass);
+}
+
+/* ---------- the cards ---------- */
+.drawer {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 2rem 1.25rem 5rem;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid #221e17;
+    border-radius: 3px;
+    padding: 1.5rem 1.75rem 3.1rem;
+    position: relative;
+    box-shadow: 0 2px 0 #060504;
+}
+
+/* the punched hole the rod passes through */
+.card::after {
+    content: "";
+    position: absolute;
+    bottom: 0.8rem;
+    left: 50%;
+    width: 0.9rem;
+    height: 0.9rem;
+    margin-left: -0.45rem;
+    border-radius: 50%;
+    background: var(--walnut);
+    border: 1px solid #2a251c;
+}
+
+.rule-top {
+    margin: 0 0 0.85rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--redrule);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--faint);
+}
+
+.card-title {
+    margin: 0 0 0.9rem;
+    font-size: 1.45rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.card-title a {
+    text-decoration: none;
+}
+
+.card-title a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 1px;
+}
+
+/* faint blue ruling behind the text, like a real card */
+.card-body {
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0 calc(1.8em - 1px),
+        var(--bluerule) calc(1.8em - 1px) 1.8em
+    );
+}
+
+.card-body p {
+    margin: 0 0 1.8em;
+}
+
+.see-also {
+    margin: 1.2rem 0 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    color: var(--faint);
+}
+
+.see-also a {
+    color: var(--brass);
+    text-decoration: none;
+}
+
+.see-also a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- pulled card page ---------- */
+.card.pulled .card-title {
+    font-size: 1.7rem;
+}
+
+.rod-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+}
+
+.rod-nav a {
+    color: var(--faint);
+    text-decoration: none;
+}
+
+.rod-nav a:hover {
+    color: var(--brass);
+}
+
+.misfiled {
+    color: var(--faint);
+    font-style: italic;
+}
+
+/* ---------- narrow ---------- */
+@media (max-width: 40rem) {
+    .card {
+        padding: 1.2rem 1.1rem 2.8rem;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
