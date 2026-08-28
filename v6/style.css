@@ -1,0 +1,276 @@
+/* v6 — The Tower: an architectural section. Reading is climbing. */
+:root {
+    --night: #08090b;
+    --ivory: #d8d3c7;
+    --stone: #6f7a86;
+    --lamp: #b98b5e;
+    --line: #1a1e23;
+    --measure: 36rem;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--night);
+    color: var(--ivory);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+        "Book Antiqua", Georgia, serif;
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--lamp);
+}
+
+a:focus-visible {
+    outline: 1px solid var(--lamp);
+    outline-offset: 4px;
+}
+
+/* ---------- masthead ---------- */
+.masthead {
+    max-width: calc(var(--measure) + 8rem);
+    margin: 0 auto;
+    padding: 3.5rem 1.25rem 2.5rem;
+}
+
+.masthead h1 {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: 0.03em;
+}
+
+.masthead .plaque {
+    margin: 0.3rem 0 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--stone);
+}
+
+/* ---------- altimeter ---------- */
+.altimeter {
+    position: fixed;
+    top: 1rem;
+    right: 1.25rem;
+    z-index: 2;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    color: var(--stone);
+    background: var(--night);
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--line);
+}
+
+/* ---------- the shaft ---------- */
+.shaft {
+    max-width: calc(var(--measure) + 8rem);
+    margin: 0 auto;
+    padding: 0 1.25rem 5rem;
+    position: relative;
+}
+
+/* the structural line the storeys hang from */
+.shaft::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(1.25rem + 3.25rem);
+    width: 1px;
+    background: var(--line);
+}
+
+.storey {
+    position: relative;
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, var(--measure));
+    gap: 1.5rem;
+    padding: 3rem 0;
+}
+
+/* floor slab */
+.storey::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--line);
+}
+
+.storey-plate {
+    text-align: right;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--stone);
+}
+
+.storey-no {
+    display: block;
+    font-size: 2.2rem;
+    line-height: 1.1;
+    color: var(--lamp);
+}
+
+.storey-date {
+    display: block;
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 0.4rem;
+}
+
+.storey-title {
+    margin: 0 0 0.75rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.storey-body p {
+    margin: 1rem 0;
+}
+
+.storey-body p:first-child {
+    margin-top: 0;
+}
+
+.stair {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--stone);
+}
+
+.ground {
+    padding: 1.5rem 0 0;
+    text-align: center;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--stone);
+    border-bottom: 3px double var(--line);
+}
+
+.collapse {
+    color: var(--stone);
+    font-style: italic;
+}
+
+/* ---------- a single storey (post page) ---------- */
+.room {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 1rem 1.25rem 5rem;
+}
+
+.room .storey-plate {
+    text-align: left;
+    display: flex;
+    gap: 1.25rem;
+    align-items: baseline;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.9rem;
+}
+
+.room .storey-no {
+    display: inline;
+    font-size: 1.6rem;
+}
+
+.room .storey-title {
+    font-size: 1.6rem;
+    margin: 1.75rem 0 1rem;
+}
+
+.stairwell {
+    margin-top: 3.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.stair.roof {
+    color: var(--line);
+    color: #3a4048;
+}
+
+.hint {
+    margin-top: 2.5rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.14em;
+    color: #3a4048;
+    text-transform: uppercase;
+}
+
+/* ---------- narrow ---------- */
+@media (max-width: 44rem) {
+    .storey {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .shaft::before {
+        left: 1.25rem;
+    }
+
+    .storey-plate {
+        text-align: left;
+        display: flex;
+        gap: 1rem;
+        align-items: baseline;
+        padding-left: 1rem;
+    }
+
+    .storey-room {
+        padding-left: 1rem;
+    }
+
+    .storey-no {
+        font-size: 1.5rem;
+    }
+
+    .altimeter {
+        display: none;
+    }
+
+    .hint {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
