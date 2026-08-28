@@ -1,0 +1,269 @@
+/* -------------------- TOKENS -------------------- */
+:root {
+    --paper: #17140f;
+    --paper-raised: #1d1a13;
+    --ink: #cbbfa8;
+    --ink-dim: #8d8474;
+    --ink-bright: #e3d6bb;
+    --amber: #c69749;
+    --rust: #a8654a;
+    --olive: #8a9163;
+    --rule: #2c261c;
+    --measure: 68ch;
+}
+
+/* -------------------- BASE -------------------- */
+html {
+    background-color: var(--paper);
+}
+
+body {
+    margin: 0;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: "Noto Sans Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+a,
+a:link,
+a:visited {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+}
+
+a:focus-visible {
+    outline: 1px dotted var(--amber);
+    outline-offset: 3px;
+}
+
+/* -------------------- SHELL -------------------- */
+.shell {
+    display: grid;
+    grid-template-columns: 19rem minmax(0, 1fr);
+    max-width: 78rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+    gap: 4rem;
+}
+
+/* -------------------- INDEX RAIL -------------------- */
+.rail {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 3.5rem 0 2rem;
+    border-right: 1px solid var(--rule);
+}
+
+.rail-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: normal;
+    font-style: oblique;
+    letter-spacing: 0.06em;
+    color: var(--ink-bright);
+}
+
+.rail-nav {
+    margin: 0.35rem 0 2.5rem;
+    color: var(--ink-dim);
+    font-size: 0.8rem;
+}
+
+.rail-nav [aria-current="page"] {
+    color: var(--amber);
+}
+
+.rail-heading {
+    margin: 0 0 0.75rem;
+    font-size: 0.7rem;
+    font-weight: normal;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+}
+
+.rail-index {
+    list-style: none;
+    margin: 0;
+    padding: 0 1.5rem 0 0;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.rail-index li {
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--rule);
+}
+
+.rail-index li:last-child {
+    border-bottom: none;
+}
+
+.rail-index a {
+    display: block;
+    line-height: 1.4;
+}
+
+.rail-index .rail-date {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-dim);
+}
+
+.rail-index .rail-name {
+    color: var(--ink);
+}
+
+.rail-index a:hover .rail-name,
+.rail-index a[aria-current="page"] .rail-name {
+    color: var(--amber);
+}
+
+.rail-foot {
+    padding-top: 1.5rem;
+    font-size: 0.7rem;
+    color: var(--ink-dim);
+}
+
+/* -------------------- READING COLUMN -------------------- */
+.reading {
+    padding: 3.5rem 0 6rem;
+    min-width: 0;
+}
+
+.post {
+    max-width: var(--measure);
+    padding-bottom: 3.5rem;
+    margin-bottom: 3.5rem;
+    border-bottom: 1px solid var(--rule);
+}
+
+.reading .post:last-child {
+    border-bottom: none;
+}
+
+.post-title {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: normal;
+    font-style: oblique;
+    color: var(--ink-bright);
+}
+
+.post-date {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-dim);
+}
+
+.post-body {
+    text-align: justify;
+    hyphens: auto;
+}
+
+.post-body p {
+    margin: 1.35rem 0 0;
+}
+
+.post-body p:first-of-type::first-line {
+    letter-spacing: 0.04em;
+    color: var(--ink-bright);
+}
+
+.continue {
+    display: inline-block;
+    margin-top: 1.1rem;
+    font-style: italic;
+    color: var(--olive);
+}
+
+.post-footer {
+    margin-top: 1.6rem;
+    font-size: 0.75rem;
+    font-style: italic;
+    color: var(--rust);
+}
+
+.post-footer-tags {
+    color: var(--ink-dim);
+    font-style: normal;
+}
+
+.note {
+    max-width: var(--measure);
+    color: var(--ink-dim);
+}
+
+/* -------------------- SCROLLBARS -------------------- */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(203, 191, 168, 0.14) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(203, 191, 168, 0.14);
+}
+
+:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(203, 191, 168, 0.3);
+}
+
+/* -------------------- SMALL SCREENS -------------------- */
+@media (max-width: 46rem) {
+    .shell {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+        padding: 0 1.25rem;
+    }
+
+    .rail {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--rule);
+        padding: 2.5rem 0 1.5rem;
+    }
+
+    .rail-index {
+        padding-right: 0;
+        overflow: visible;
+    }
+
+    .reading {
+        padding: 2.5rem 0 4rem;
+    }
+
+    .post-body {
+        text-align: left;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
