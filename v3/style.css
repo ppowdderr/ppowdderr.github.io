@@ -1,0 +1,321 @@
+/* -------------------- TOKENS -------------------- */
+:root {
+    --slate: #0d1117;
+    --ink: #9aa4b2;
+    --ink-bright: #c8cfd9;
+    --ink-dim: #5f6a78;
+    --sage: #7f9f7f;
+    --rule: #1c232d;
+    --measure: 34rem;
+    --margin-col: 11rem;
+    --gutter: 2.5rem;
+}
+
+/* -------------------- BASE -------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: var(--slate);
+}
+
+body {
+    margin: 0;
+    background-color: var(--slate);
+    color: var(--ink);
+    font-family: "EB Garamond", Garamond, "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 19px;
+    line-height: 1.7;
+    font-feature-settings: "liga" 1, "onum" 1;
+}
+
+.mono,
+.folio,
+.margin-note,
+.margin-label,
+.rail-date {
+    font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.6;
+}
+
+a,
+a:link,
+a:visited {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+a:hover,
+a:focus-visible {
+    border-bottom-color: var(--sage);
+    color: var(--ink-bright);
+}
+
+a:focus-visible {
+    outline: 1px dotted var(--sage);
+    outline-offset: 4px;
+}
+
+/* -------------------- PAGE FRAME -------------------- */
+.leaf {
+    max-width: calc(var(--margin-col) + var(--gutter) + var(--measure) + 4rem);
+    margin: 0 auto;
+    padding: 0 2rem 8rem;
+}
+
+.masthead {
+    display: grid;
+    grid-template-columns: var(--margin-col) minmax(0, var(--measure));
+    column-gap: var(--gutter);
+    padding: 5rem 0 3rem;
+}
+
+.masthead-margin {
+    text-align: right;
+    color: var(--ink-dim);
+}
+
+.masthead h1 {
+    grid-column: 2;
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    color: var(--ink-bright);
+}
+
+.masthead nav {
+    grid-column: 2;
+    margin-top: 0.4rem;
+    color: var(--ink-dim);
+    font-style: italic;
+}
+
+.masthead nav [aria-current="page"] {
+    color: var(--sage);
+}
+
+/* -------------------- MARGINALIA ENTRY -------------------- */
+.entry {
+    display: grid;
+    grid-template-columns: var(--margin-col) minmax(0, var(--measure));
+    column-gap: var(--gutter);
+    padding: 2.75rem 0;
+    border-top: 1px solid var(--rule);
+}
+
+.entry-margin {
+    text-align: right;
+    color: var(--ink-dim);
+    padding-top: 0.55rem;
+}
+
+.entry-margin > * + * {
+    margin-top: 0.9rem;
+}
+
+.entry-margin > .margin-label {
+    margin-top: 2.5rem;
+}
+
+.entry-margin .folio {
+    color: var(--sage);
+}
+
+.margin-note {
+    display: block;
+    color: var(--ink-dim);
+}
+
+.margin-note em {
+    font-family: "EB Garamond", Garamond, Georgia, serif;
+    font-size: 0.95rem;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.entry-text {
+    min-width: 0;
+}
+
+.entry-title {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--ink-bright);
+}
+
+.entry-body p {
+    margin: 0 0 1.15rem;
+    text-align: justify;
+    hyphens: auto;
+}
+
+.entry-body p:last-child {
+    margin-bottom: 0;
+}
+
+/* manuscript opening: a modest drop cap, then a small-caps run-in */
+.entry-body .post-content > p:first-of-type::first-letter {
+    float: left;
+    margin: 0.34rem 0.5rem 0 0;
+    font-size: 3.1rem;
+    line-height: 0.72;
+    color: var(--sage);
+}
+
+.entry-body .post-content > p:first-of-type::first-line {
+    font-variant: small-caps;
+    letter-spacing: 0.03em;
+    color: var(--ink-bright);
+}
+
+.continue {
+    display: inline-block;
+    margin-top: 1rem;
+    font-style: italic;
+    color: var(--sage);
+}
+
+/* -------------------- INDEX IN THE MARGIN -------------------- */
+.margin-label {
+    display: block;
+    color: var(--ink-dim);
+    opacity: 0.7;
+}
+
+.rail-index {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+}
+
+.rail-index li {
+    margin-bottom: 0.85rem;
+}
+
+.rail-index a {
+    display: block;
+    font-style: italic;
+    line-height: 1.35;
+    color: var(--ink-dim);
+}
+
+.rail-index a[aria-current="page"] {
+    color: var(--sage);
+}
+
+.rail-index .rail-date {
+    display: block;
+    color: var(--ink-dim);
+    font-style: normal;
+    opacity: 0.75;
+}
+
+.colophon {
+    display: grid;
+    grid-template-columns: var(--margin-col) minmax(0, var(--measure));
+    column-gap: var(--gutter);
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-dim);
+}
+
+.colophon p {
+    grid-column: 2;
+    margin: 0;
+    font-style: italic;
+}
+
+.note {
+    color: var(--ink-dim);
+    font-style: italic;
+}
+
+/* -------------------- SCROLLBARS -------------------- */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(154, 164, 178, 0.14) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(154, 164, 178, 0.14);
+}
+
+:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(154, 164, 178, 0.3);
+}
+
+/* -------------------- SMALL SCREENS -------------------- */
+@media (max-width: 54rem) {
+    body {
+        font-size: 18px;
+    }
+
+    .leaf {
+        padding: 0 1.35rem 4rem;
+    }
+
+    .masthead,
+    .entry,
+    .colophon {
+        grid-template-columns: minmax(0, 1fr);
+        column-gap: 0;
+    }
+
+    .masthead h1,
+    .masthead nav,
+    .colophon p {
+        grid-column: 1;
+    }
+
+    .masthead {
+        padding: 3rem 0 2rem;
+    }
+
+    .masthead-margin {
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+
+    .entry-margin {
+        text-align: left;
+        padding-top: 0;
+        margin-bottom: 1.25rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem 1.25rem;
+    }
+
+    .entry-margin > * + * {
+        margin-top: 0;
+    }
+
+    .entry-body p {
+        text-align: left;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}

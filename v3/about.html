@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>about &mdash; my ivory tower</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="leaf">
+  <header class="masthead">
+    <div class="masthead-margin mono">a commonplace book</div>
+    <h1><a href="index.html">my ivory tower</a></h1>
+    <nav><a href="about.html" aria-current="page">about</a>; <a href="index.html">blog</a>; genres;</nav>
+  </header>
+
+  <main>
+    <article class="entry">
+      <aside class="entry-margin" id="about-margin">
+        <span class="folio">a standing note</span>
+      </aside>
+      <div class="entry-text">
+        <h2 class="entry-title">about</h2>
+        <div class="entry-body">
+          <div class="post-content">
+          <p>
+            This is a room, not a storefront. I write here to find out what I think, which
+            means most of these essays are arguments I am having with myself and losing
+            politely. Nothing is optimised: there is no newsletter, no counter of readers,
+            no schedule that I keep.
+          </p>
+          <p>
+            The subjects are whatever survives a long walk &mdash; attention, boredom,
+            habit, the odd book that refuses to leave. If a piece reads as unfinished,
+            that is usually accurate. I would rather publish a thought mid-flight than let
+            it cool into something tidy and false.
+          </p>
+          <p>
+            You are welcome to read, disagree, and take whatever is useful.
+          </p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="colophon">
+    <p>written slowly, read slowly.</p>
+  </footer>
+</div>
+
+<script src="blog.js"></script>
+<script>
+  loadAllPosts().then((posts) => renderMarginIndex(posts, null, document.getElementById("about-margin")));
+</script>
+
+</body>
+</html>
