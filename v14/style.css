@@ -1,0 +1,231 @@
+/* v14 — Endgame: ivory pieces on a dim study diagram. */
+:root {
+    --study: #0a0a0b;
+    --ivory: #ded7c6;
+    --dim: #83807a;
+    --felt-green: #5d7263;
+    --sq-light: #17171a;
+    --sq-dark: #101013;
+    --line: #222226;
+    --measure: 36rem;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--study);
+    color: var(--ivory);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+        "Book Antiqua", Georgia, serif;
+    font-size: 17px;
+    line-height: 1.85;
+}
+
+a {
+    color: inherit;
+}
+
+a:focus-visible {
+    outline: 2px solid var(--felt-green);
+    outline-offset: 2px;
+}
+
+/* ---------- header ---------- */
+.problem {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 3.5rem 1.25rem 0.5rem;
+    text-align: center;
+}
+
+.problem h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+}
+
+.problem h1 a {
+    text-decoration: none;
+}
+
+.problem p {
+    margin: 0.4rem 0 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dim);
+}
+
+.problem p a {
+    color: var(--dim);
+    text-decoration: none;
+}
+
+.problem p a:hover {
+    color: var(--felt-green);
+}
+
+/* ---------- the diagram ---------- */
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    width: min(30rem, calc(100vw - 2.5rem));
+    margin: 2rem auto 0;
+    border: 1px solid var(--line);
+}
+
+.sq {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-decoration: none;
+}
+
+.sq.light {
+    background: var(--sq-light);
+}
+
+.sq.dark {
+    background: var(--sq-dark);
+}
+
+.piece {
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    color: var(--ivory);
+    text-shadow: 0 2px 0 #000;
+    transition: transform 150ms ease;
+}
+
+.sq.occupied:hover .piece,
+.sq.occupied:focus-visible .piece {
+    transform: translateY(-3px);
+    color: #fff8e7;
+}
+
+/* coordinate whispered in the square's corner when occupied */
+.sq.occupied::after {
+    content: attr(data-square);
+    position: absolute;
+    right: 0.25rem;
+    bottom: 0.15rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+    color: var(--felt-green);
+}
+
+/* ---------- the caption: the game so far ---------- */
+.caption {
+    max-width: 30rem;
+    margin: 1.75rem auto 0;
+    padding: 0 1.25rem 5rem;
+}
+
+.move {
+    margin: 0.4rem 0;
+    padding: 0.2rem 0;
+    font-size: 0.95rem;
+}
+
+.coord {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--felt-green);
+    margin-right: 0.5rem;
+}
+
+.move a {
+    text-decoration: none;
+}
+
+.move a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 1px;
+}
+
+.when {
+    font-size: 0.75rem;
+    color: var(--dim);
+}
+
+.resigned {
+    color: var(--dim);
+    font-style: italic;
+}
+
+/* ---------- the study (post page) ---------- */
+.study {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 5rem;
+}
+
+.annotation {
+    margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--felt-green);
+}
+
+.study-title {
+    margin: 0.6rem 0 1.2rem;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.study-body p {
+    margin: 1.15rem 0;
+}
+
+.variations {
+    margin-top: 2.75rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    font-size: 0.85rem;
+}
+
+.variations a {
+    color: var(--dim);
+    text-decoration: none;
+}
+
+.variations a:hover {
+    color: var(--felt-green);
+}
+
+/* ---------- narrow ---------- */
+@media (max-width: 40rem) {
+    .problem h1 {
+        font-size: 1.3rem;
+    }
+
+    .study-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .piece {
+        transition: none;
+    }
+
+    * {
+        animation: none !important;
+    }
+}
