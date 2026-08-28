@@ -1,0 +1,218 @@
+/* v11 — Palimpsest: each older essay fainter, tilted, showing through. */
+:root {
+    --vellum-dark: #0e0c0a;
+    --hand: #d9d0bd;
+    --faded: #8d8674;
+    --madder: #a3654f;
+    --measure: 36rem;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(140% 100% at 50% 0%, #131009 0%, var(--vellum-dark) 60%);
+    color: var(--hand);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+        "Book Antiqua", Georgia, serif;
+    font-size: 17px;
+    line-height: 1.85;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+}
+
+a:focus-visible {
+    outline: 1px solid var(--madder);
+    outline-offset: 4px;
+}
+
+/* ---------- heading ---------- */
+.scriptorium {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 3.5rem 1.25rem 0.5rem;
+}
+
+.scriptorium h1,
+.scriptorium .site-name {
+    margin: 0;
+    font-size: 1.9rem;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: 0.02em;
+}
+
+.scriptorium h1 a,
+.scriptorium .site-name a {
+    text-decoration: none;
+}
+
+.scriptorium p {
+    margin: 0.4rem 0 0;
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--faded);
+}
+
+.scriptorium p a {
+    color: var(--faded);
+    text-decoration: none;
+}
+
+.scriptorium p a:hover {
+    color: var(--madder);
+}
+
+/* ---------- the layers ---------- */
+.vellum {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 6rem;
+    position: relative;
+}
+
+.layer {
+    padding: 2.5rem 0;
+    /* deeper layers fade and tilt, as under earlier hands */
+    opacity: calc(1 - var(--depth, 0) * 0.28);
+    transform: rotate(calc(var(--depth, 0) * -0.5deg));
+    transition: opacity 250ms ease, transform 250ms ease;
+}
+
+.layer:hover,
+.layer:focus-within {
+    opacity: 1;
+    transform: none;
+}
+
+.under {
+    margin: 0;
+    font-size: 0.72rem;
+    font-style: italic;
+    letter-spacing: 0.08em;
+    color: var(--madder);
+}
+
+.layer-title {
+    margin: 0.5rem 0 1rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: 0.01em;
+}
+
+.layer-title a {
+    text-decoration: none;
+}
+
+.layer-title a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+}
+
+.layer-body p {
+    margin: 1.1rem 0;
+}
+
+.raise {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--faded);
+    text-decoration: none;
+}
+
+.raise:hover {
+    color: var(--madder);
+}
+
+.scraped {
+    color: var(--faded);
+    font-style: italic;
+}
+
+/* ---------- the raised layer (post page) ---------- */
+.layer.raised {
+    opacity: 1;
+    transform: none;
+    position: relative;
+    z-index: 1;
+}
+
+/* ghost titles of the other layers drift behind the text */
+.ghost-field {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.ghost {
+    position: absolute;
+    top: calc(14rem + var(--g) * 22rem);
+    left: calc(-2rem + var(--g) * 3rem);
+    font-size: 4.2rem;
+    font-style: italic;
+    white-space: nowrap;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(217, 208, 189, 0.07);
+    transform: rotate(-3deg);
+}
+
+.scrapes {
+    margin-top: 3rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid rgba(217, 208, 189, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+.scrapes a {
+    color: var(--faded);
+    text-decoration: none;
+}
+
+.scrapes a:hover {
+    color: var(--madder);
+}
+
+/* ---------- narrow ---------- */
+@media (max-width: 40rem) {
+    .scriptorium h1,
+    .scriptorium .site-name {
+        font-size: 1.5rem;
+    }
+
+    .layer-title {
+        font-size: 1.4rem;
+    }
+
+    .ghost {
+        font-size: 2.6rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .layer {
+        transition: none;
+        transform: none;
+    }
+
+    * {
+        animation: none !important;
+    }
+}
