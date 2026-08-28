@@ -1,0 +1,408 @@
+/* -------------------- TOKENS -------------------- */
+:root {
+    --slate: #0d1117;
+    --ink: #adb6c2;
+    --ink-bright: #d2d8e0;
+    --ink-dim: #626d7c;
+    --sage: #7f9f7f;
+    --rule: #1c232d;
+    --measure: 34rem;
+    --margin-col: 11rem;
+    --gutter: 2.5rem;
+}
+
+/* -------------------- BASE -------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: var(--slate);
+}
+
+body {
+    margin: 0;
+    background-color: var(--slate);
+    color: var(--ink);
+    /* system serifs only: nothing is ever fetched */
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", "Hoefler Text", Georgia, "Times New Roman", serif;
+    font-size: 19px;
+    line-height: 1.72;
+}
+
+.mono,
+.folio,
+.margin-note,
+.margin-label,
+.quire-date {
+    font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.6;
+}
+
+a,
+a:link,
+a:visited {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+a:hover,
+a:focus-visible {
+    border-bottom-color: var(--sage);
+    color: var(--ink-bright);
+}
+
+a:focus-visible {
+    outline: 1px dotted var(--sage);
+    outline-offset: 4px;
+}
+
+/* -------------------- PAGE FRAME -------------------- */
+.leaf {
+    max-width: calc(var(--margin-col) + var(--gutter) + var(--measure) + 4rem);
+    margin: 0 auto;
+    padding: 0 2rem 7rem;
+}
+
+.masthead {
+    display: grid;
+    grid-template-columns: var(--margin-col) minmax(0, var(--measure));
+    column-gap: var(--gutter);
+    padding: 5rem 0 3rem;
+}
+
+.masthead-margin {
+    text-align: right;
+    color: var(--ink-dim);
+}
+
+.masthead h1 {
+    grid-column: 2;
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    color: var(--ink-bright);
+}
+
+.masthead nav {
+    grid-column: 2;
+    margin-top: 0.4rem;
+    color: var(--ink-dim);
+    font-style: italic;
+}
+
+.masthead nav [aria-current="page"] {
+    color: var(--sage);
+}
+
+/* -------------------- A LEAF -------------------- */
+.entry {
+    display: grid;
+    column-gap: var(--gutter);
+    padding: 2.75rem 0;
+    border-top: 1px solid var(--rule);
+}
+
+/* recto: marginalia on the left, as on a right-hand page */
+.entry.recto {
+    grid-template-columns: var(--margin-col) minmax(0, var(--measure));
+}
+
+.entry.recto .entry-margin {
+    grid-column: 1;
+    text-align: right;
+}
+
+.entry.recto .entry-text {
+    grid-column: 2;
+}
+
+/* verso: marginalia swing to the outer edge on the right */
+.entry.verso {
+    grid-template-columns: minmax(0, var(--measure)) var(--margin-col);
+}
+
+.entry.verso .entry-margin {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: left;
+}
+
+.entry.verso .entry-text {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.entry-margin {
+    color: var(--ink-dim);
+    padding-top: 0.55rem;
+}
+
+.entry-margin > * + * {
+    margin-top: 0.9rem;
+}
+
+.entry-margin .folio {
+    color: var(--sage);
+}
+
+.margin-note {
+    display: block;
+    color: var(--ink-dim);
+}
+
+.entry-text {
+    min-width: 0;
+}
+
+.entry-title {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--ink-bright);
+}
+
+.entry-body p {
+    margin: 0 0 1.15rem;
+    text-align: justify;
+    hyphens: auto;
+}
+
+.entry-body p:last-child {
+    margin-bottom: 0;
+}
+
+/* the opening: a drop cap, and the first line in small caps */
+.entry-body .post-content > p:first-of-type::first-letter {
+    float: left;
+    margin: 0.3rem 0.5rem 0 0;
+    font-size: 3.1rem;
+    line-height: 0.74;
+    color: var(--sage);
+}
+
+.entry-body .post-content > p:first-of-type::first-line {
+    font-variant: small-caps;
+    letter-spacing: 0.03em;
+    color: var(--ink-bright);
+}
+
+/* -------------------- CATCHWORD -------------------- */
+/* the scribe's habit: the next leaf's first word, kept at the foot of this one */
+.catchword {
+    display: block;
+    margin-top: 2.5rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--rule);
+    text-align: right;
+    font-style: italic;
+    color: var(--ink-dim);
+}
+
+.catchword a {
+    color: var(--sage);
+}
+
+.catchword .catchword-label {
+    display: block;
+    color: var(--ink-dim);
+    opacity: 0.65;
+}
+
+/* -------------------- TURNING LEAVES -------------------- */
+.turn {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    color: var(--ink-dim);
+    font-style: italic;
+}
+
+.turn a {
+    color: var(--ink);
+}
+
+.turn .turn-hint {
+    font-style: normal;
+}
+
+/* -------------------- THE QUIRE (index) -------------------- */
+.quire {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.quire-leaf {
+    display: grid;
+    grid-template-columns: var(--margin-col) minmax(0, var(--measure));
+    column-gap: var(--gutter);
+    padding: 1.6rem 0;
+    border-top: 1px solid var(--rule);
+}
+
+.quire-leaf .folio {
+    text-align: right;
+    color: var(--sage);
+    padding-top: 0.5rem;
+}
+
+.quire-leaf .quire-date {
+    display: block;
+    color: var(--ink-dim);
+    margin-top: 0.5rem;
+}
+
+.quire-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--ink-bright);
+}
+
+.quire-opening {
+    margin: 0.3rem 0 0;
+    color: var(--ink-dim);
+    font-style: italic;
+}
+
+/* -------------------- COLOPHON -------------------- */
+.colophon {
+    display: grid;
+    grid-template-columns: var(--margin-col) minmax(0, var(--measure));
+    column-gap: var(--gutter);
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-dim);
+}
+
+.colophon p {
+    grid-column: 2;
+    margin: 0;
+    font-style: italic;
+}
+
+.note {
+    color: var(--ink-dim);
+    font-style: italic;
+}
+
+/* -------------------- SCROLLBARS -------------------- */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(173, 182, 194, 0.14) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(173, 182, 194, 0.14);
+}
+
+:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(173, 182, 194, 0.3);
+}
+
+/* -------------------- SMALL SCREENS -------------------- */
+@media (max-width: 54rem) {
+    body {
+        font-size: 18px;
+    }
+
+    .leaf {
+        padding: 0 1.35rem 4rem;
+    }
+
+    .masthead,
+    .colophon,
+    .quire-leaf,
+    .entry.recto,
+    .entry.verso {
+        grid-template-columns: minmax(0, 1fr);
+        column-gap: 0;
+    }
+
+    .masthead h1,
+    .masthead nav,
+    .colophon p,
+    .entry.recto .entry-margin,
+    .entry.verso .entry-margin,
+    .entry.recto .entry-text,
+    .entry.verso .entry-text {
+        grid-column: 1;
+    }
+
+    .entry.verso .entry-margin,
+    .entry.verso .entry-text {
+        grid-row: auto;
+    }
+
+    .masthead {
+        padding: 3rem 0 2rem;
+    }
+
+    .masthead-margin {
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+
+    /* marginalia settle at the foot of the leaf on a narrow page */
+    .entry.recto .entry-margin,
+    .entry.verso .entry-margin {
+        order: 2;
+        text-align: left;
+        padding-top: 1.5rem;
+        margin-top: 1.75rem;
+        border-top: 1px solid var(--rule);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem 1.25rem;
+    }
+
+    .entry-margin > * + * {
+        margin-top: 0;
+    }
+
+    .quire-leaf .folio {
+        text-align: left;
+        padding-top: 0;
+        margin-bottom: 0.35rem;
+    }
+
+    .quire-leaf .quire-date {
+        display: inline;
+        margin-left: 1rem;
+    }
+
+    .entry-body p {
+        text-align: left;
+    }
+
+    /* no keyboard to turn with */
+    .turn .turn-hint {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
