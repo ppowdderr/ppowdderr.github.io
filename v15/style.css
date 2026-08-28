@@ -1,0 +1,237 @@
+/* v15 — Almanac: the year kept as a sortable ledger table. */
+:root {
+    --night: #0c0b09;
+    --oat: #d8d0bd;
+    --faded: #8a8271;
+    --barn-red: #a25540;
+    --rule: #262319;
+    --measure: 36rem;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--night);
+    color: var(--oat);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+        "Book Antiqua", Georgia, serif;
+    font-size: 17px;
+    line-height: 1.85;
+}
+
+a {
+    color: inherit;
+}
+
+a:focus-visible {
+    outline: 2px solid var(--barn-red);
+    outline-offset: 3px;
+}
+
+/* ---------- masthead ---------- */
+.masthead {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 3.25rem 1.25rem 0;
+    text-align: center;
+    border-bottom: 3px double var(--rule);
+    padding-bottom: 1.4rem;
+}
+
+.masthead h1 {
+    margin: 0;
+    font-size: 1.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    font-variant: small-caps;
+}
+
+.masthead h1 a {
+    text-decoration: none;
+}
+
+.masthead p {
+    margin: 0.35rem 0 0;
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--faded);
+}
+
+.masthead p a {
+    color: var(--faded);
+}
+
+/* ---------- the ledger ---------- */
+.year {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 1.75rem 1.25rem 5rem;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+caption {
+    caption-side: bottom;
+    padding-top: 1rem;
+    font-size: 0.72rem;
+    font-style: italic;
+    color: var(--faded);
+    text-align: left;
+}
+
+th {
+    text-align: left;
+    border-bottom: 1px solid var(--rule);
+    padding: 0;
+}
+
+th button {
+    all: unset;
+    cursor: pointer;
+    display: block;
+    padding: 0.5rem 0.6rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faded);
+}
+
+th button:hover {
+    color: var(--barn-red);
+}
+
+th button:focus-visible {
+    outline: 2px solid var(--barn-red);
+    outline-offset: -2px;
+}
+
+td {
+    padding: 0.7rem 0.6rem;
+    border-bottom: 1px dotted var(--rule);
+    vertical-align: baseline;
+}
+
+.c-date {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--faded);
+    white-space: nowrap;
+}
+
+.c-moon {
+    font-size: 0.85rem;
+}
+
+.c-entry a {
+    text-decoration: none;
+}
+
+.c-entry a:hover {
+    color: var(--barn-red);
+}
+
+.c-season {
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--faded);
+    white-space: nowrap;
+}
+
+.c-length {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.7rem;
+    color: var(--faded);
+    text-align: right;
+    white-space: nowrap;
+}
+
+.weathered {
+    color: var(--faded);
+    font-style: italic;
+}
+
+/* ---------- the day's entry ---------- */
+.day {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 1.75rem 1.25rem 5rem;
+}
+
+.conditions {
+    margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faded);
+}
+
+.entry-title {
+    margin: 0.6rem 0 1.2rem;
+    font-size: 2rem;
+    font-weight: 500;
+    font-variant: small-caps;
+}
+
+.entry-body p {
+    margin: 1.15rem 0;
+}
+
+.turn {
+    margin-top: 2.75rem;
+    padding-top: 1.1rem;
+    border-top: 3px double var(--rule);
+    display: flex;
+    justify-content: space-between;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.turn a {
+    color: var(--faded);
+    text-decoration: none;
+}
+
+.turn a:hover {
+    color: var(--barn-red);
+}
+
+/* ---------- narrow ---------- */
+@media (max-width: 40rem) {
+    .masthead h1 {
+        font-size: 1.45rem;
+    }
+
+    .entry-title {
+        font-size: 1.5rem;
+    }
+
+    .c-season {
+        display: none;
+    }
+
+    th:nth-child(4) {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
