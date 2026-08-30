@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>my ivory tower · on the wire</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="desk">
+  <h1><a href="index.html">my ivory tower</a></h1>
+  <p class="line-note">station IVRYTWR · line open · messages below in order of receipt</p>
+</header>
+
+<div class="filter-row">
+  <label for="filter">filter the wire</label>
+  <input id="filter" type="text" autocomplete="off" spellcheck="false" placeholder="TYPE TO FILTER · / TO FOCUS · ESC TO CLEAR">
+</div>
+
+<p class="wire-status" id="wire-status" aria-live="polite"></p>
+
+<main class="wire" id="wire">
+  <!-- transmissions print here -->
+</main>
+
+<script src="blog.js"></script>
+<script>initWire();</script>
+
+</body>
+</html>

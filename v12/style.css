@@ -1,0 +1,233 @@
+/* v12 — Teleprinter: telegrams on the wire, filterable as they arrive. */
+:root {
+    --room: #0a0b0a;
+    --tape: #d6cfb8;
+    --dim: #7f7a68;
+    --signal: #b3a24e;
+    --line: #1c1d1a;
+    --measure: 41rem;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--room);
+    color: var(--tape);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+    font-size: 15.5px;
+    line-height: 1.8;
+}
+
+a {
+    color: inherit;
+}
+
+a:focus-visible {
+    outline: 1px solid var(--signal);
+    outline-offset: 3px;
+}
+
+/* ---------- the desk ---------- */
+.desk {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 3rem 1.25rem 0.75rem;
+}
+
+.desk h1 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+}
+
+.desk h1 a {
+    text-decoration: none;
+}
+
+.desk .line-note {
+    margin: 0.5rem 0 0;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: var(--dim);
+    text-transform: uppercase;
+}
+
+.desk .line-note a {
+    color: var(--dim);
+}
+
+.desk .line-note a:hover {
+    color: var(--signal);
+}
+
+/* ---------- the wire filter ---------- */
+.filter-row {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 1rem 1.25rem 0;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+}
+
+.filter-row label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dim);
+    white-space: nowrap;
+}
+
+#filter {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    color: var(--tape);
+    font: inherit;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0;
+    text-transform: uppercase;
+}
+
+#filter:focus {
+    outline: none;
+    border-bottom-color: var(--signal);
+}
+
+.wire-status {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 0.5rem 1.25rem 0;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+}
+
+/* ---------- transmissions ---------- */
+.wire {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 6rem;
+}
+
+.transmission {
+    padding: 2rem 0;
+    border-top: 1px dashed var(--line);
+}
+
+.transmission:first-child {
+    border-top: none;
+}
+
+.routing {
+    margin: 0;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--signal);
+    word-break: break-word;
+}
+
+.subject {
+    margin: 0.7rem 0 1rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+}
+
+.subject a {
+    text-decoration: none;
+}
+
+.subject a:hover {
+    background: var(--signal);
+    color: var(--room);
+}
+
+/* the tape: comfortable, never justified */
+.tape p {
+    margin: 1.1rem 0;
+    text-align: left;
+    max-width: 66ch;
+}
+
+.endmark {
+    margin: 1.4rem 0 0;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    color: var(--dim);
+}
+
+.endmark a {
+    color: var(--signal);
+    text-decoration: none;
+}
+
+.endmark a:hover {
+    text-decoration: underline;
+}
+
+.reroute {
+    margin-top: 2.25rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+}
+
+.reroute a {
+    text-decoration: none;
+    color: var(--dim);
+}
+
+.reroute a:hover {
+    color: var(--signal);
+}
+
+.garbled {
+    color: var(--dim);
+    letter-spacing: 0.1em;
+}
+
+.hint {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 0 1.25rem 2rem;
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #4c493e;
+}
+
+/* ---------- narrow ---------- */
+@media (max-width: 40rem) {
+    .desk h1 {
+        letter-spacing: 0.2em;
+    }
+
+    .subject {
+        font-size: 1rem;
+        letter-spacing: 0.1em;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
