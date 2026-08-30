@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>my ivory tower · the almanac</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <h1><a href="index.html">my ivory tower</a></h1>
+  <p>an almanac of the year's thinking, kept in one table</p>
+</header>
+
+<main class="year">
+  <table id="ledger">
+    <caption>click a column heading to re-order the year.</caption>
+    <thead>
+      <tr>
+        <th scope="col"><button data-key="date">date<span class="dir"></span></button></th>
+        <th scope="col"><span class="visually-hidden"></span></th>
+        <th scope="col"><button data-key="entry">entry<span class="dir"></span></button></th>
+        <th scope="col"><span></span></th>
+        <th scope="col"><button data-key="length">length<span class="dir"></span></button></th>
+      </tr>
+    </thead>
+    <tbody id="rows">
+      <!-- the year fills in -->
+    </tbody>
+  </table>
+</main>
+
+<script src="blog.js"></script>
+<script>initAlmanac();</script>
+
+</body>
+</html>
