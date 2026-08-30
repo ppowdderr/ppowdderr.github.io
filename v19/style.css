@@ -1,0 +1,292 @@
+/* v19 — The Gate of Ivory
+   Two vast doors, a seam of light, and the essays as dreams passing through.
+   Zero dependencies. System fonts only. */
+
+:root {
+    --abyss: #050807;
+    --mist: #0b100f;
+    --ivory: #e9e2d0;
+    --dim: #837f6e;
+    --spectral: #8fd0c6;
+    --line: #172220;
+    --measure: 40rem;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--abyss); }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--ivory);
+    font-family: Iowan Old Style, Palatino, "Book Antiqua", Georgia, serif;
+    font-size: 1.02rem;
+    line-height: 1.75;
+    background: var(--abyss);
+    overflow-x: hidden;
+}
+
+a { color: var(--spectral); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+
+:focus-visible {
+    outline: 2px solid var(--spectral);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+/* ---------- header ---------- */
+
+.lintel {
+    text-align: center;
+    padding: 3.4rem 1.25rem 0;
+}
+
+.lintel h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0.7em;
+    text-indent: 0.7em;
+    text-transform: uppercase;
+    text-shadow: 0 0 2.2rem rgba(143, 208, 198, 0.35);
+}
+
+.lintel h1 a { color: var(--ivory); }
+.lintel h1 a:hover { text-decoration: none; color: var(--spectral); }
+
+.epigraph {
+    margin: 1rem auto 0;
+    max-width: 34rem;
+    color: var(--dim);
+    font-style: italic;
+    font-size: 0.92rem;
+}
+
+.lintel.small { padding-top: 2.2rem; text-align: left; max-width: var(--measure); margin: 0 auto; }
+.site-name { margin: 0; font-size: 0.9rem; letter-spacing: 0.08em; }
+.site-name a { color: var(--dim); }
+.site-name a:hover { color: var(--spectral); }
+
+/* ---------- the gate ---------- */
+
+.gate {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 15rem;
+    margin: 2.6rem auto 0;
+    max-width: 30rem;
+    perspective: 55rem;
+}
+
+.door {
+    width: 9.5rem;
+    background:
+        repeating-linear-gradient(to bottom,
+            transparent 0 2.6rem,
+            rgba(233, 226, 208, 0.06) 2.6rem calc(2.6rem + 1px)),
+        linear-gradient(160deg, #16130c 0%, #0d0b07 55%, #070604 100%);
+    border: 1px solid rgba(233, 226, 208, 0.14);
+    border-bottom: none;
+    border-radius: 8rem 8rem 0 0 / 11rem 11rem 0 0;
+}
+
+.door.left  { transform: rotateY(24deg);  transform-origin: left center; }
+.door.right { transform: rotateY(-24deg); transform-origin: right center; }
+
+.seam {
+    width: 2px;
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(143, 208, 198, 0.9) 30%,
+        rgba(233, 226, 208, 0.9) 60%,
+        transparent 100%);
+    box-shadow: 0 0 2.4rem 0.4rem rgba(143, 208, 198, 0.25);
+}
+
+/* ---------- the dreams ---------- */
+
+.dreams {
+    position: relative;
+    max-width: 44rem;
+    margin: 3rem auto 5rem;
+    padding: 0 1.25rem;
+}
+
+/* the seam continues down through the kept dreams */
+.dreams::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -3rem;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, rgba(143, 208, 198, 0.35), transparent);
+    pointer-events: none;
+}
+
+.keeper-note {
+    color: var(--dim);
+    font-size: 0.85rem;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 2.4rem;
+}
+
+.seal {
+    display: flex;
+    gap: 1.6rem;
+    align-items: flex-start;
+    padding: 2rem 0;
+    border-top: 1px solid var(--line);
+}
+
+.sigil {
+    position: relative;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 4.4rem;
+    height: 4.4rem;
+    margin-top: 0.3rem;
+    border-radius: 50%;
+}
+
+.sigil-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(233, 226, 208, 0.4);
+    border-top-color: var(--spectral);
+    border-bottom-style: dotted;
+    transform: rotate(var(--turn, 0deg));
+    transition: transform 600ms ease;
+}
+
+.sigil:hover .sigil-ring,
+.sigil:focus-visible .sigil-ring {
+    transform: rotate(calc(var(--turn, 0deg) + 180deg));
+    box-shadow: 0 0 1.6rem rgba(143, 208, 198, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sigil-ring { transition: none; }
+}
+
+.sigil-numeral {
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--ivory);
+}
+
+.seal-text { min-width: 0; }
+
+.dreamt {
+    margin: 0;
+    color: var(--dim);
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.dreamt.centered { text-align: center; }
+
+.seal-title {
+    margin: 0.4rem 0 0.6rem;
+    font-size: 1.35rem;
+    font-weight: 400;
+}
+
+.seal-title a { color: var(--ivory); }
+.seal-title a:hover { color: var(--spectral); text-decoration: none; }
+
+.seal-body p { margin: 0.85rem 0; }
+
+.pass {
+    display: inline-block;
+    margin-top: 0.3rem;
+    font-size: 0.88rem;
+    font-style: italic;
+}
+
+.hush {
+    color: var(--dim);
+    font-style: italic;
+    text-align: center;
+}
+
+/* ---------- the dream (post page) ---------- */
+
+.dream-page {
+    background:
+        radial-gradient(ellipse 70% 40% at 50% 0%, var(--mist) 0%, transparent 75%),
+        var(--abyss);
+}
+
+.dream {
+    max-width: var(--measure);
+    margin: 2.4rem auto 5rem;
+    padding: 0 1.25rem;
+}
+
+.dream-title {
+    margin: 1rem 0 2.2rem;
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 0.05em;
+}
+
+.dream-title::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 3rem;
+    margin: 1.6rem auto 0;
+    background: linear-gradient(to bottom, var(--spectral), transparent);
+}
+
+.dream-body p { margin: 1.1rem 0; }
+
+.dream-body .post-content > p:first-child::first-letter {
+    font-size: 3.1em;
+    line-height: 0.85;
+    float: left;
+    padding: 0.06em 0.12em 0 0;
+    color: var(--spectral);
+}
+
+.wake {
+    margin: 3rem 0 0;
+    color: var(--dim);
+    font-style: italic;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.thresholds {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 2.4rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* ---------- small screens ---------- */
+
+@media (max-width: 540px) {
+    .lintel h1 { font-size: 1.35rem; letter-spacing: 0.45em; text-indent: 0.45em; }
+    .gate { height: 11rem; }
+    .door { width: 7rem; }
+    .seal { flex-direction: column; gap: 1rem; }
+    .sigil { width: 3.6rem; height: 3.6rem; }
+    .dreams::before { display: none; }
+    .dream-title { font-size: 1.6rem; }
+}

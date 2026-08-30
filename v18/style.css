@@ -1,0 +1,293 @@
+/* v18 — The Bone Orrery
+   Essays as ivory moons in orbit around a dark sun.
+   Zero dependencies. System fonts only. */
+
+:root {
+    --void: #07060d;
+    --nebula: #120e1e;
+    --ivory: #e9e2d1;
+    --dim: #8d8677;
+    --ember: #c9a15f;
+    --line: #201a2e;
+    --measure: 40rem;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--void); }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--ivory);
+    font-family: Iowan Old Style, Palatino, "Book Antiqua", Georgia, serif;
+    font-size: 1.02rem;
+    line-height: 1.75;
+    background:
+        radial-gradient(ellipse 90% 55% at 50% -10%, var(--nebula) 0%, transparent 70%),
+        var(--void);
+    overflow-x: hidden;
+}
+
+a { color: var(--ember); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+
+:focus-visible {
+    outline: 2px solid var(--ember);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+/* ---------- header ---------- */
+
+.firmament {
+    text-align: center;
+    padding: 3.2rem 1.25rem 0;
+}
+
+.firmament h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 0.55em;
+    text-transform: uppercase;
+    text-indent: 0.55em;
+}
+
+.firmament h1 a { color: var(--ivory); }
+.firmament h1 a:hover { text-decoration: none; color: var(--ember); }
+
+.epigraph {
+    margin: 0.9rem auto 0;
+    max-width: 34rem;
+    color: var(--dim);
+    font-style: italic;
+    font-size: 0.92rem;
+}
+
+.firmament.small { padding-top: 2.2rem; text-align: left; max-width: var(--measure); margin: 0 auto; }
+.site-name { margin: 0; font-size: 0.9rem; letter-spacing: 0.08em; }
+.site-name a { color: var(--dim); }
+.site-name a:hover { color: var(--ember); }
+
+/* ---------- the orrery ---------- */
+
+.orrery {
+    position: relative;
+    width: min(88vmin, 46rem);
+    height: min(88vmin, 46rem);
+    margin: 1.5rem auto 0;
+}
+
+.dark-sun {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 16%;
+    height: 16%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 32%, #171226 0%, #050409 65%);
+    box-shadow:
+        0 0 2.5rem rgba(201, 161, 95, 0.18),
+        inset 0 0 1.2rem rgba(0, 0, 0, 0.9),
+        0 0 0 1px rgba(201, 161, 95, 0.25);
+}
+
+.ring {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: calc(34% + var(--i) * (60% / var(--n)));
+    height: calc(34% + var(--i) * (60% / var(--n)));
+    transform: translate(-50%, -50%) rotate(var(--a, 0deg));
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    animation: spin calc(180s + var(--i) * 90s) linear infinite;
+}
+
+@keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(var(--a, 0deg)); }
+    to   { transform: translate(-50%, -50%) rotate(calc(var(--a, 0deg) + 360deg)); }
+}
+
+/* the moon rides the rim of its ring */
+.moon {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    display: block;
+    transform: translate(-50%, -50%);
+}
+
+.moon-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    transform: rotate(calc(0deg - var(--a, 0deg)));
+    animation: counterspin calc(180s + var(--i, 0) * 90s) linear infinite;
+}
+
+@keyframes counterspin {
+    from { transform: rotate(calc(0deg - var(--a, 0deg))); }
+    to   { transform: rotate(calc(-360deg - var(--a, 0deg))); }
+}
+
+.disc {
+    display: grid;
+    place-items: center;
+    width: 3.1rem;
+    height: 3.1rem;
+    border-radius: 50%;
+    font-size: 1.15rem;
+    color: #4a4234;
+    background: radial-gradient(circle at 35% 30%, #f4eede 0%, #cfc5ab 60%, #a89d80 100%);
+    box-shadow:
+        0 0 1.4rem rgba(233, 226, 209, 0.35),
+        inset -0.3rem -0.35rem 0.7rem rgba(74, 66, 52, 0.45);
+}
+
+.moon:hover .disc,
+.moon:focus-visible .disc {
+    box-shadow:
+        0 0 2.2rem rgba(233, 226, 209, 0.6),
+        inset -0.3rem -0.35rem 0.7rem rgba(74, 66, 52, 0.45);
+}
+
+.moon-name {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dim);
+    white-space: nowrap;
+    background: rgba(7, 6, 13, 0.75);
+    padding: 0.1rem 0.45rem;
+    border-radius: 2px;
+}
+
+.moon:hover .moon-name,
+.moon:focus-visible .moon-name { color: var(--ember); }
+
+@media (prefers-reduced-motion: reduce) {
+    .ring, .ring .moon .moon-inner { animation: none; }
+}
+
+/* ---------- ephemeris ---------- */
+
+.ephemeris {
+    max-width: var(--measure);
+    margin: 3rem auto 5rem;
+    padding: 0 1.25rem;
+}
+
+.eph-note {
+    color: var(--dim);
+    font-size: 0.85rem;
+    font-style: italic;
+    text-align: center;
+    border-top: 1px solid var(--line);
+    padding-top: 1.6rem;
+}
+
+.eph-entry {
+    padding: 2.1rem 0 0.6rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.eph-orbit {
+    margin: 0;
+    color: var(--dim);
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.eph-title {
+    margin: 0.45rem 0 0.6rem;
+    font-size: 1.35rem;
+    font-weight: 400;
+}
+
+.eph-title a { color: var(--ivory); }
+.eph-title a:hover { color: var(--ember); text-decoration: none; }
+
+.eph-body p { margin: 0.85rem 0; }
+
+.descend {
+    display: inline-block;
+    margin: 0.4rem 0 1.4rem;
+    font-size: 0.88rem;
+    font-style: italic;
+}
+
+.turning {
+    color: var(--dim);
+    font-style: italic;
+    text-align: center;
+}
+
+/* ---------- the chamber (post page) ---------- */
+
+.chamber {
+    max-width: var(--measure);
+    margin: 2.2rem auto 5rem;
+    padding: 0 1.25rem;
+}
+
+.orbit-label {
+    margin: 0;
+    color: var(--dim);
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.chamber-title {
+    margin: 1rem 0 2rem;
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 0.04em;
+}
+
+.chamber-title::after {
+    content: "";
+    display: block;
+    width: 4.5rem;
+    height: 1px;
+    margin: 1.4rem auto 0;
+    background: linear-gradient(to right, transparent, var(--ember), transparent);
+}
+
+.chamber-body p { margin: 1.1rem 0; }
+
+.chamber-body .post-content > p:first-child::first-letter {
+    font-size: 3.1em;
+    line-height: 0.85;
+    float: left;
+    padding: 0.06em 0.12em 0 0;
+    color: var(--ember);
+}
+
+.orbits {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* ---------- small screens ---------- */
+
+@media (max-width: 540px) {
+    .firmament h1 { font-size: 1.2rem; letter-spacing: 0.4em; text-indent: 0.4em; }
+    .disc { width: 2.4rem; height: 2.4rem; font-size: 0.95rem; }
+    .moon-name { display: none; }
+    .chamber-title { font-size: 1.6rem; }
+}
