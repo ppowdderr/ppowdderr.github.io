@@ -1,0 +1,285 @@
+/* v17 — Punch Card: manila cards fed through a reader; essays print on green-bar. */
+:root {
+    --machine: #0a0b0a;
+    --manila: #d9cfae;
+    --manila-dim: #9a916f;
+    --phosphor: #79a37a;
+    --bar: #0e120e;
+    --line: #1e201c;
+    --measure: 38rem;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--machine);
+    color: var(--manila);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+a {
+    color: inherit;
+}
+
+a:focus-visible {
+    outline: 2px solid var(--phosphor);
+    outline-offset: 3px;
+}
+
+/* ---------- console header ---------- */
+.console {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 3.25rem 1.25rem 0.25rem;
+}
+
+.console h1 {
+    margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+}
+
+.console h1 a {
+    text-decoration: none;
+}
+
+.console p {
+    margin: 0.5rem 0 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--manila-dim);
+}
+
+.console p a {
+    color: var(--manila-dim);
+    text-decoration: none;
+}
+
+.console p a:hover {
+    color: var(--phosphor);
+}
+
+/* ---------- the deck ---------- */
+.deck {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.card {
+    display: block;
+    position: relative;
+    background: #11100c;
+    border: 1px solid var(--line);
+    padding: 1rem 1.2rem 1.1rem;
+    text-decoration: none;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    transition: border-color 150ms ease, transform 150ms ease;
+    overflow: hidden;
+}
+
+.card:hover,
+.card:focus-visible {
+    border-color: var(--manila-dim);
+    transform: translateX(0.35rem);
+}
+
+/* the clipped corner every punch card has */
+.corner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 0.9rem solid var(--machine);
+    border-right: 0.9rem solid transparent;
+}
+
+.card-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.seq {
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    color: var(--phosphor);
+}
+
+.card-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+}
+
+.card-date {
+    margin-left: auto;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--manila-dim);
+}
+
+/* the punch field: 24 columns x 12 rows, one hole per column */
+.field {
+    display: block;
+    position: relative;
+    height: 4.2rem;
+    margin: 0.8rem 0 0.7rem;
+    /* faint row ruling */
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0 0.32rem,
+        var(--line) 0.32rem calc(0.32rem + 1px)
+    );
+}
+
+.hole {
+    position: absolute;
+    left: calc(var(--c) / 24 * 100%);
+    top: calc(var(--r) / 12 * 100%);
+    width: 0.42rem;
+    height: 0.24rem;
+    background: var(--machine);
+    border: 1px solid #2c2a22;
+    border-radius: 1px;
+}
+
+/* the interpretation line printed along the card's top edge, here at the foot */
+.interpret {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: var(--manila-dim);
+}
+
+.card:hover .interpret,
+.card:focus-visible .interpret {
+    color: var(--manila);
+}
+
+.deck-note {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 0.5rem 1.25rem 4.5rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: #56533f;
+}
+
+.jam {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--manila-dim);
+}
+
+/* ---------- the listing (post page) ---------- */
+.printout {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 5rem;
+}
+
+.listing {
+    /* green-bar paper: alternating faint bands behind the text */
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0 3.2rem,
+        var(--bar) 3.2rem 6.4rem
+    );
+    border: 1px solid var(--line);
+    padding: 1.8rem 1.9rem 2.2rem;
+}
+
+.job-line {
+    margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.14em;
+    color: var(--phosphor);
+    word-break: break-word;
+}
+
+.job-line.end {
+    margin-top: 1.6rem;
+}
+
+.listing-title {
+    margin: 0.7rem 0 1.2rem;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+        Georgia, serif;
+    font-size: 1.9rem;
+    font-weight: 500;
+}
+
+.listing-body {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+        Georgia, serif;
+    font-size: 17px;
+    line-height: 1.85;
+}
+
+.listing-body p {
+    margin: 1.15rem 0;
+}
+
+.feed {
+    margin-top: 1.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+}
+
+.feed a {
+    color: var(--manila-dim);
+    text-decoration: none;
+}
+
+.feed a:hover {
+    color: var(--phosphor);
+}
+
+/* ---------- narrow ---------- */
+@media (max-width: 40rem) {
+    .listing {
+        padding: 1.3rem 1rem 1.7rem;
+    }
+
+    .listing-title {
+        font-size: 1.45rem;
+    }
+
+    .card-date {
+        margin-left: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}

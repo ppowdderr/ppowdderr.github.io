@@ -1,0 +1,3 @@
+# v17 — Punch Card
+
+The index is a deck of manila punch cards: each essay is a card with a clipped corner, a sequence number (`CARD 0003`), a punch field whose hole pattern is derived deterministically from the slug (the essay "encoded", 24 columns over faint row ruling), and an interpretation line of its opening words. Feeding a card prints its listing on green-bar paper — alternating CSS bands behind serif prose — between `// JOB IVORYTWR` and `// END OF LISTING` lines, with FEED PREVIOUS/NEXT CARD navigation. Old pattern: the IBM punched card and line-printer listing. New pattern: slug-hashed generative punch patterns via CSS custom properties.
