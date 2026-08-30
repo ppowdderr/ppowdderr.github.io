@@ -1,0 +1,3 @@
+# v16 — Star Chart
+
+The essays are plotted as the constellation *Turris Eburnea* (the Ivory Tower) on a gratuled night-sky plate. Each star's position is derived deterministically from its slug (FNV hash → `--x`/`--y` custom properties), its brightness from recency (newest shines largest), and its designation from the Bayer scheme (`α Tur`, `β Tur` …). Gold constellation lines (inline SVG polyline) join the stars in order of writing. A legend lists each star with its epoch; opening one gives the observation with "sweep to" navigation. Old pattern: the engraved celestial atlas. New pattern: data-driven CSS custom-property positioning.
